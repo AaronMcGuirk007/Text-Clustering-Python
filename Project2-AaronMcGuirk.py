@@ -21,4 +21,6 @@ Text clustering HW#2 for CSIS320
 @version: Spring 2022
 """
 
+
+n_row, n_col = 1, 4
 data = np.loadtxt("descriptions.txt", dtype="str", delimiter="\t", skiprows=1)
