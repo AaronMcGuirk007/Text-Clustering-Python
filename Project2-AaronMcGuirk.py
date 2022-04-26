@@ -28,11 +28,23 @@ Notes:
     School of Business = 3
 """
 
+"""
+def clustering_33_groups():
+    
+
+    
+def clustering_57_groups():
+    
+    
+
+def clustering_optimal_groups():
+"""
+
 data = np.loadtxt("descriptions.txt", dtype="str", delimiter="\t", skiprows=1)
 y_km = data
 
 
-def group_three_clustering():
+def clustering_3_groups():
     
     km = KMeans(n_clusters=3)
     km.fit(data)
@@ -42,8 +54,6 @@ def group_three_clustering():
     centers = km.cluster_centers_
     plt.scatter(centers[:, 0], centers[:, 1], c='red', s=1314, alpha=0.5)
     
-    
-            
+    #for i in range(len(data)):
         
         
-
