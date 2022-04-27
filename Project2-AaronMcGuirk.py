@@ -50,7 +50,7 @@ def numOfSchoolsClustering(data, clusters):
     km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
-    school_labels = vectorizer.get_feature_names()
+    school_labels = Vectorizer.get_feature_names()
     
     #y_km = km.predict(data)
    
@@ -74,7 +74,7 @@ def numOfDepartmentsClustering(data, clusters):
     km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
-    school_labels = vectorizer.get_feature_names()
+    school_labels = Vectorizer.get_feature_names()
     
     #y_km2 = km2.predict(data)
     
@@ -98,7 +98,7 @@ def numOfPrefixsClustering(data, clusters):
     km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
-    school_labels = vectorizer.get_feature_names()
+    school_labels = Vectorizer.get_feature_names()
     
     #y_km3= km3.predict(data)
    
@@ -122,7 +122,7 @@ def numOptimalClustering(data, clusters):
     km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
-    school_labels = vectorizer.get_feature_names()
+    school_labels = Vectorizer.get_feature_names()
     
     #y_kmOpt = kmOpt.predict(data)
     
