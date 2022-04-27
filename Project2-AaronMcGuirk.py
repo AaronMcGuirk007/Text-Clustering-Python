@@ -2,7 +2,8 @@ import sklearn
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
+import nltk
+from sklearn.cluster import KMeans, DBSCAN
 from sklearn.metrics import silhouette_samples, silhouette_score
 from sklearn.metrics import adjusted_rand_score
 from sklearn.feature_extraction.text import CountVectorizer, ENGLISH_STOP_WORDS, TfidfVectorizer
@@ -37,17 +38,17 @@ num_departments = 33
 
 num_prefixes = 57
 
-num_optimize = 0
+num_optimize = 7
 
 data = np.loadtxt("descriptions.txt", dtype="str", delimiter="\t", skiprows=1)
-data_vec = TfidVectorizer(data)
+data_vec = TfidfVectorizer(data)
 #y_km = data
 #TBD = 1
 
 
 def numOfSchoolsClustering(data, clusters):
     
-    km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
+    km = KMeans(n_clusters=clusters, max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
     school_labels = Vectorizer.get_feature_names()
@@ -71,7 +72,7 @@ def numOfSchoolsClustering(data, clusters):
         
 def numOfDepartmentsClustering(data, clusters):
     
-    km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
+    km = KMeans(n_clusters=clusters, max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
     school_labels = Vectorizer.get_feature_names()
@@ -95,7 +96,7 @@ def numOfDepartmentsClustering(data, clusters):
 
 def numOfPrefixsClustering(data, clusters):
     
-    km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
+    km = KMeans(n_clusters=clusters, max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
     school_labels = Vectorizer.get_feature_names()
@@ -119,7 +120,7 @@ def numOfPrefixsClustering(data, clusters):
     
 def numOptimalClustering(data, clusters):
     
-    km = kMeans(n_clusters=clusters, solver='kmeans', max_df=100, learning_rate = 1)
+    km = KMeans(n_clusters=clusters, max_df=100, learning_rate = 1)
     km.fit(data)
     centers = km.cluster_centers.argssort()
     school_labels = Vectorizer.get_feature_names()
@@ -141,25 +142,35 @@ def numOptimalClustering(data, clusters):
             print(centers[j])
 
         
-def avg_clusters(data,clusters):
-    groups = np.unique(clusters)
-    nrows = len(groups)
-    ncols = data.shape[1]
-    result = np.empty((nrows,ncols))
-    for g in groups:
-        x = data[clusters==g]
-        for c in range(ncols):
-            result[g,c] = np.average(x[:,c])
-    return result
+#def avg_clusters(data,clusters):
+    #groups = np.unique(clusters)
+    #nrows = len(groups)
+    #ncols = data.shape[1]
+    #result = np.empty((nrows,ncols))
+    #for g in groups:
+    #    x = data[clusters==g]
+    #    for c in range(ncols):
+    #        result[g,c] = np.average(x[:,c])
+    #return result
         
         
 def test_methods():
     
     # Tests all of the clustering methods!
     print(numOfSchoolsClustering(data, num_schools))
+    #print(silhouette_score(data_vec, km.labels_, metric='manhattan'))
+    #scores = cross_val_score(LogisticRegression(solver="saga", multi_class="multinomial"), X_train, y_train, cv=5)
     
     print(numOfDepartmentsClustering(data, num_departments))
+    #print(silhouette_score(data_vec, km.labels_, metric='manhattan'))
+    #scores = cross_val_score(LogisticRegression(solver="saga", multi_class="multinomial"), X_train, y_train, cv=5)
     
     print(numOfPrefixsClustering(data, num_prefixes))
+    #print(silhouette_score(data_vec, km.labels_, metric='manhattan'))
+    #scores = cross_val_score(LogisticRegression(solver="saga", multi_class="multinomial"), X_train, y_train, cv=5)
+
     
     print(numOptimalClustering(data, num_optimize))
+    #print(silhouette_score(data_vec, km.labels_, metric='manhattan'))
+    #scores = cross_val_score(LogisticRegression(solver="saga", multi_class="multinomial"), X_train, y_train, cv=5)
+    
