@@ -40,7 +40,7 @@ num_prefixes = 57
 num_optimize = 0
 
 data = np.loadtxt("descriptions.txt", dtype="str", delimiter="\t", skiprows=1)
-data_vec = TfidVectorizer("descriptions.txt")
+data_vec = TfidVectorizer(data)
 #y_km = data
 #TBD = 1
 
